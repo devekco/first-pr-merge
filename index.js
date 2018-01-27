@@ -9,7 +9,8 @@ module.exports = robot => {
 
       if (mergedPRs.length === 0) {
         try {
-          const config = await context.config('config.yml')
+          const config = await robot.config.get(context, defaultConfig);
+          
           if (config.firstPRMergeComment) {
             context.github.issues.createComment(context.issue({body: config.firstPRMergeComment}))
           }
